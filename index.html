@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Parkway Inn | Luxury & Comfort</title>
+  
+  <!-- Elegant Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables for Elegant Color Palette */
+    :root {
+      --primary-gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --dark-bg: #1a1a1a;
+      --light-bg: #fdfdfb;
+      --text-main: #333333;
+      --text-muted: #666666;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+      50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+      100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+    }
+
+    /* Navbar */
+    nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      color: white;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .phone-number {
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--primary-gold);
+      backdrop-filter: blur(5px);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), 
+                  url('https://images.unsplash.com/photo-1542314831-c6a4d1409e1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease-out forwards;
+      text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin-bottom: 40px;
+      animation: fadeInUp 1.2s ease-out forwards;
+      opacity: 0;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      background-color: var(--primary-gold);
+      color: var(--dark-bg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1.4s ease-out forwards;
+      opacity: 0;
+    }
+
+    .btn:hover {
+      background-color: #fff;
+      animation: glow 2s infinite;
+      transform: translateY(-3px);
+    }
+
+    /* Booking Bar Section */
+    .booking-bar-container {
+      max-width: 1100px;
+      margin: -60px auto 40px;
+      position: relative;
+      z-index: 10;
+      padding: 0 20px;
+      animation: fadeInUp 1.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .booking-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 4px solid var(--primary-gold);
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark-bg);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .form-group input, .form-group select {
+      padding: 14px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      color: var(--text-main);
+      background-color: #f9f9f9;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+    }
+
+    .book-submit-btn {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      padding: 0 30px;
+      background-color: #25d366; /* WhatsApp Green */
+      color: white;
+      border: 2px solid #25d366;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      height: 52px;
+      line-height: 48px;
+    }
+
+    .book-submit-btn:hover {
+      background-color: #128c7e;
+      border-color: #128c7e;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Split Section: Pricing & Map */
+    .split-section {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 60px auto 80px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .pricing-side {
+      flex: 1;
+      min-width: 350px;
+      padding: 60px 50px;
+      background-color: #ffffff;
+    }
+
+    .pricing-side h2 {
+      font-size: 2.5rem;
+      color: var(--dark-bg);
+      margin-bottom: 10px;
+    }
+
+    .pricing-side .subtitle {
+      color: var(--primary-gold);
+      font-style: italic;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .room-card {
+      padding: 20px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--primary-gold);
+      background: var(--light-bg);
+      border-radius: 0 10px 10px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .room-card:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+    }
+
+    .room-title {
+      font-size: 1.3rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      color: var(--dark-bg);
+    }
+
+    .room-price {
+      color: var(--primary-gold);
+      font-size: 1.4rem;
+    }
+
+    .room-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .map-side {
+      flex: 1;
+      min-width: 350px;
+      position: relative;
+    }
+
+    .map-side iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      border: none;
+      filter: grayscale(20%) contrast(110%);
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .reviews-section h2 {
+      font-size: 2.5rem;
+      color: var(--dark-bg);
+      margin-bottom: 40px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .review-card {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      text-align: center;
+      border-top: 4px solid var(--primary-gold);
+      transition: transform 0.3s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .stars {
+      color: var(--primary-gold);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+
+    .review-text {
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .reviewer-name {
+      font-weight: 600;
+      color: var(--dark-bg);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+    }
+
+    /* Footer / Call to Action */
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    footer h2 {
+      font-size: 2rem;
+      color: var(--primary-gold);
+      margin-bottom: 20px;
+    }
+
+    footer p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.8;
+    }
+
+    .contact-big {
+      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-big:hover {
+      color: var(--primary-gold);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .booking-form { flex-direction: column; align-items: stretch; }
+      .book-submit-btn { width: 100%; margin-top: 10px; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      nav { padding: 20px; flex-direction: column; gap: 15px; }
+      .split-section { margin: 40px 20px; }
+      .pricing-side { padding: 40px 20px; }
+      .contact-big { font-size: 2rem; }
+      .booking-bar-container { margin-top: -20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Parkway Inn</div>
+    <div class="phone-number">📞 +91 44 2747 1111</div>
+  </nav>
+
+  <!-- Hero Image Section -->
+  <header class="hero">
+    <h1>Parkway Inn</h1>
+    <p>Experience unparalleled luxury and comfort right in the heart of the OMR IT Corridor. Your perfect getaway awaits.</p>
+    <a href="#book-now" class="btn">Book Your Stay</a>
+  </header>
+
+  <!-- Interactive Booking Bar -->
+  <div class="booking-bar-container" id="book-now">
+    <div class="booking-form">
+      <div class="form-group">
+        <label for="checkin">Check-in</label>
+        <input type="date" id="checkin" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="checkout">Check-out</label>
+        <input type="date" id="checkout" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="guests">Guests</label>
+        <select id="guests">
+          <option value="1">1 Adult</option>
+          <option value="2" selected>2 Adults</option>
+          <option value="3">2 Adults, 1 Child</option>
+          <option value="4">Family (Up to 4)</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="room">Room Type</label>
+        <select id="room">
+          <option value="standard">Standard Double AC</option>
+          <option value="twin">Deluxe Twin AC</option>
+          <option value="executive">Executive Triple</option>
+        </select>
+      </div>
+      
+      <!-- WhatsApp Reservation Action Button -->
+      <a href="#" id="whatsapp-btn" class="book-submit-btn" target="_blank" rel="noopener noreferrer" onclick="updateWhatsAppLink(event)">Reserve Now</a>
+    </div>
+  </div>
+
+  <!-- Split Section: Pricing & Map -->
+  <section class="split-section">
+    
+    <!-- Left Side: Pricing -->
+    <div class="pricing-side">
+      <h2>Accommodations</h2>
+      <p class="subtitle">Curated comfort for the modern traveler.</p>
+
+      <div class="room-card" onclick="document.getElementById('room').value='standard'; document.getElementById('book-now').scrollIntoView({behavior: 'smooth'});">
+        <div class="room-title">
+          <span>Standard Double AC</span>
+          <span class="room-price">₹1,500<span style="font-size:0.8rem; color:#666;">/night</span></span>
+        </div>
+        <p class="room-desc">A plush queen bed with elegant lighting, perfect for solo travelers or couples.</p>
+      </div>
+
+      <div class="room-card" onclick="document.getElementById('room').value='twin'; document.getElementById('book-now').scrollIntoView({behavior: 'smooth'});">
+        <div class="room-title">
+          <span>Deluxe Twin AC</span>
+          <span class="room-price">₹1,900<span style="font-size:0.8rem; color:#666;">/night</span></span>
+        </div>
+        <p class="room-desc">Spacious room featuring two comfortable single beds and beautiful city views.</p>
+      </div>
+
+      <div class="room-card" onclick="document.getElementById('room').value='executive'; document.getElementById('book-now').scrollIntoView({behavior: 'smooth'});">
+        <div class="room-title">
+          <span>Executive Triple</span>
+          <span class="room-price">₹2,400<span style="font-size:0.8rem; color:#666;">/night</span></span>
+        </div>
+        <p class="room-desc">Our largest suite with three beds, a sitting area, and premium bath amenities.</p>
+      </div>
+    </div>
+
+    <!-- Right Side: Google Map -->
+    <div class="map-side">
+      <iframe 
+        src="https://maps.google.com/maps?q=Hotel%20Parkway%20Inn,%20Chennai&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <h2>Guest Experiences</h2>
+    <div class="reviews-grid">
+      
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Absolutely beautiful property! The room was incredibly spacious, and the elegant lighting made it feel so luxurious. Highly recommend for business trips."</p>
+        <p class="reviewer-name">— Anjali R.</p>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Impeccable service and a very comfortable bed. It was the perfect oasis after a long day of meetings in the OMR IT Corridor. Will definitely return."</p>
+        <p class="reviewer-name">— Rajesh M.</p>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p class="review-text">"Great stay overall. The concierge was very helpful, and the room was spotless. The location is excellent, right next to all the major tech parks."</p>
+        <p class="reviewer-name">— Sarah T.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <h2>Ready to experience Parkway Inn?</h2>
+    <p>Call our concierge directly to reserve your room at the best available rate.</p>
+    <a href="tel:+917550040955" class="contact-big">+91 755 004 0955</a>
+  </footer>
+
+  <!-- Dynamic Link Updater Script -->
+  <script>
+    function updateWhatsAppLink(event) {
+      const checkin = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      
+      if (!checkin || !checkout) {
+        alert('Please select check-in and check-out dates.');
+        event.preventDefault();
+        return;
+      }
+
+      const guests = document.getElementById('guests').options[document.getElementById('guests').selectedIndex].text;
+      const room = document.getElementById('room').options[document.getElementById('room').selectedIndex].text;
+
+      const textMessage = `Hello Parkway Inn, I would like to request a room reservation:\n\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nRoom: ${room}\n\nPlease confirm availability.`;
+      const encodedMessage = encodeURIComponent(textMessage);
+
+      const whatsappUrl = `https://wa.me/917550040955?text=${encodedMessage}`;
+      
+      // Update the button's href live right before it opens
+      document.getElementById('whatsapp-btn').href = whatsappUrl;
+    }
+  </script>
+</body>
+</html>
